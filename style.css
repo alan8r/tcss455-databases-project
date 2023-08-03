@@ -37,4 +37,8 @@ body {
         visibility: visible !important;
         top: var(--topNavbarHeight) !important;
     }
+
+    main {
+        margin-left: var(--offcanvas-width);
+    }
 }
