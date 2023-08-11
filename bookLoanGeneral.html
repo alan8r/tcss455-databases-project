@@ -1,0 +1,282 @@
+<!--TCSS 445 A Phase III-->
+<!--Team 12 SQL Scholars-->
+<!--Team members: Alan Thompson, Jerry Libago, Lixin Wang-->
+<!--Aug/16/2023-->
+<!--Admin Page-->
+<!--Document Typre Declaration HTML-->
+<!DOCTYPE html>
+<!--Opening tag for the root element of the HTML Documentm specifies the language of the document is English-->
+<html lang="en">
+
+<head>
+    <!--correct character set-->
+    <meta charset="" utf-8>
+    <!-- Set the viewport for proper rendering and touch zooming -->
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <!-- Set the title of the web page -->
+    <title>Admin | SQL Scholars</title>
+    <!-- Include Bootstrap CSS library from a CDN (Content Delivery Network) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!--Include CSS file-->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Include jQuery library from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <!-- Include custom JS file named "index.js" -->
+    <script src="index.js"></script>
+    <!-- Include Bootstrap JS library from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4398a205d9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--Top navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!--offcanvas trigger start-->
+            <button class="navbar-toggler me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--offcanvas trigger end-->
+            <a class="navbar-brand text-uppercase fw-bold text-uppercase me-auto" href="#">SQL Scholars Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex ms-auto" role="search">
+                    <div class="input-group my-3 my-lg-0">
+                        <input type="text" class="form-control" placeholder="Search..."
+                            aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary btn-primary text-white" type="button"
+                            id="button-addon2">
+                            <i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </form>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="panda.jpg" class="user-icon" />
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Change Password</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Top navbar end-->
+
+    <!--Offcanvas start-->
+    <div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold">Core</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="admin.html"><i
+                            class="fas fa-tachometer-alt-fast me-2"></i>
+                        Dashboard</a>
+                    <hr />
+                </li>
+
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold">Inventory</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#booksMgmt" role="button"
+                        aria-expanded="false" aria-controls="booksMgmt">
+                        <i class="fas fa-book me-2"></i> Books Management
+                        <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="booksMgmt">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li><a href="addBook.html" class="nav-link"><i class="far fa-plus me-2"></i> Add New</a>
+                                </li>
+                                <li><a href="manageBooks.html" class="nav-link"><i class="fas fa-list me-2"></i> Manage
+                                        All</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#userMgmt" role="button"
+                        aria-expanded="false" aria-controls="userMgmt">
+                        <i class="fas fa-user-friends me-2"></i> Users Management
+                        <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="userMgmt">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li><a href="addUser.html" class="nav-link"><i class="far fa-plus me-2"></i> Add New</a>
+                                </li>
+                                <li><a href="manageUsers.html" class="nav-link"><i class="fas fa-list me-2"></i> Manage
+                                        All</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <hr />
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold">Business</div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#bookLoan" role="button"
+                        aria-expanded="false" aria-controls="bookLoan">
+                        <i class="fas fa-book-reader me-2"></i> Books Loan
+                        <span class="right-icon float-end"><i class="fas fa-chevron-down"></i></span>
+                    </a>
+                    <div class="collapse" id="bookLoan">
+                        <div>
+                            <ul class="navbar-nav ps-3">
+                                <li><a href="bookLoanGeneral.html" class="nav-link"><i
+                                            class="fas fa-file-invoice me-2"></i> General</a></li>
+                                <li><a href="bookLoanManage.html" class="nav-link"><i class="fas fa-list me-2"></i>
+                                        Manage All</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr />
+                </li>
+                <li class="nav-item">
+                    <div class="text-secondary small text-uppercase fw-bold"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Offcanvas end-->
+
+    <!--Main contents start-->
+    <main class="mt-1 pt-3">
+        <div class="container-fluid">
+            <!--Cards-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="fw-bold text-uppercase">Dashboard</h4>
+                    <p>Statistics of the system!</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-title text-uppercase text-muted">total books loan</h6>
+                            <h1>130</h1>
+                            <a href="#" class="card-link link-underline-light">View more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-title text-uppercase text-muted">in progress</h6>
+                            <h1>87</h1>
+                            <a href="#" class="card-link link-underline-light">View more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-title text-uppercase text-muted">overdue</h6>
+                            <h1>3</h1>
+                            <a href="#" class="card-link link-underline-light">View more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-title text-uppercase text-muted">returned</h6>
+                            <h1>35</h1>
+                            <a href="#" class="card-link link-underline-light">View more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabs-->
+            <div class="row mt-5">
+                <div class="col-mt-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active text-uppercase" id="all-loans-tab" data-bs-toggle="tab"
+                                data-bs-target="#all-loans-tab-pane" type="button" role="tab"
+                                aria-controls="all-loans-tab-pane" aria-selected="false">All Loans</button>
+                        </li>
+                    </ul>
+                        <div class="tab-pane fade show active" id="all-loans-tab-pane" role="tabpanel"
+                            aria-labelledby="all-loans-tab" tabindex="0">
+                            <table class="table">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Borrow ID</th>
+                                        <th scope="col">Account ID</th>
+                                        <th scope="col">ISBN</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Loan Date</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>mOtto@gmail.com</td>
+                                        <td>07-22-2023</td>
+                                        <td><span class="badge text-bg-success">Active</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>mOtto@gmail.com</td>
+                                        <td>07-22-2023</td>
+                                        <td><span class="badge text-bg-warning">Returned</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>mOtto@gmail.com</td>
+                                        <td>07-22-2023</td>
+                                        <td><span class="badge text-bg-danger">Overdue</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--Main contents end-->
+</body>
+
+</html>
