@@ -3,11 +3,14 @@ const express = require('express');
 const mysql = require('mysql');
 // Import the cors middleware
 const cors = require('cors');
+const path = require('path');
 const app = express();
 //An Express.js middleware setup that enables CORS for the Express application
 app.use(cors());
 // Parse JSON requests
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname)));
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -23,6 +26,30 @@ db.connect((err) => {
     return;
   }
   console.log('Connected to the database');
+});
+
+//get the total count of books in book table
+app.get('/book/totalCount', (req, res) => {
+  db.query('SELECT COUNT(*) AS totalCount FROM book', (error, results) => {
+    if (error) throw error;
+    res.json(results[0]); // Assuming the total count is in the first row of the result
+  });
+});
+
+//get the total count of users in user table
+app.get('/user/totalUsersCount', (req, res) => {
+  db.query('SELECT COUNT(*) AS totalCount FROM user', (error, results) => {
+    if (error) throw error;
+    res.json(results[0]); // Assuming the total count is in the first row of the result
+  });
+});
+
+//get the total count of users in user table
+app.get('/borrowed/totalLoansCount', (req, res) => {
+  db.query('SELECT COUNT(*) AS totalCount FROM borrowed', (error, results) => {
+    if (error) throw error;
+    res.json(results[0]); // Assuming the total count is in the first row of the result
+  });
 });
 
 app.get('/book', (req, res) => {

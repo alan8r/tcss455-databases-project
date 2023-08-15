@@ -71,7 +71,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="login.html">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -159,8 +159,7 @@
                     <div class="text-secondary small text-uppercase fw-bold"></div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link sidebar-link" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                        aria-expanded="false" aria-controls="collapseExample">
+                    <a href="login.html" class="nav-link">
                         <i class="fas fa-sign-out-alt me-2"></i> Logout
                     </a>
                 </li>
@@ -182,8 +181,8 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <h6 class="card-title text-uppercase text-muted">total books</h6>
-                            <h1>130</h1>
-                            <a href="#" class="card-link link-underline-light">View more</a>
+                            <h1  id="totalBooksCount"></h1>
+                            <a href="manageBooks.html" class="card-link link-underline-light">View more</a>
                         </div>
                     </div>
                 </div>
@@ -191,8 +190,17 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <h6 class="card-title text-uppercase text-muted">total users</h6>
-                            <h1>87</h1>
-                            <a href="#" class="card-link link-underline-light">View more</a>
+                            <h1 id="totalUsersCount"></h1>
+                            <a href="manageUsers.html" class="card-link link-underline-light">View more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 class="card-title text-uppercase text-muted">total books loan</h6>
+                            <h1 id="totalLoansCount"></h1>
+                            <a href="bookLoanManage.html" class="card-link link-underline-light">View more</a>
                         </div>
                     </div>
                 </div>
@@ -201,15 +209,6 @@
                         <div class="card-body text-center">
                             <h6 class="card-title text-uppercase text-muted">total fees</h6>
                             <h1>50.00</h1>
-                            <a href="#" class="card-link link-underline-light">View more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h6 class="card-title text-uppercase text-muted">total books loan</h6>
-                            <h1>35</h1>
                             <a href="#" class="card-link link-underline-light">View more</a>
                         </div>
                     </div>
@@ -246,17 +245,7 @@
                                         <th scope="col">Create Date</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>mOtto@gmail.com</td>
-                                        <td>206-333-8876</td>
-                                        <td>221 Minor Ave, Seattle, WA 98109</td>
-                                        <td>06-01-2023</td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="recent-users-table"></tbody>
                             </table>
                         </div>
                         <div class="tab-pane fade" id="recent-loans-tab-pane" role="tabpanel"
@@ -272,35 +261,7 @@
                                         <th scope="col">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>Gone With the Wind</td>
-                                        <td>07-22-2023</td>
-                                        <td><span class="badge text-bg-success">Active</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>Fledge</td>
-                                        <td>07-22-2023</td>
-                                        <td><span class="badge text-bg-warning">Returned</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>the Day After Tomorrow</td>
-                                        <td>07-22-2023</td>
-                                        <td><span class="badge text-bg-danger">Overdue</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody id="recent-loans-table"></tbody>
                             </table>
                         </div>
 
