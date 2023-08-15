@@ -10,42 +10,7 @@ if (typeof jQuery === 'undefined') {
 $(document).ready(function () {
   console.log("Document is ready");
 
-  function fetchTotalBooksCount() {
-    fetch('book/totalCount')
-      .then(response => response.json())
-      .then(data => {
-        const totalBooksCountElement = document.getElementById('totalBooksCount');
-        totalBooksCountElement.textContent = data.totalCount; // Update the content with the total count
-      })
-      .catch(error => {
-        console.error('Error fetching total book count:', error);
-      });
-  }
-
-  function fetchTotalUsersCount() {
-    fetch('user/totalUsersCount')
-      .then(response => response.json())
-      .then(data => {
-        const totalUsersCountElement = document.getElementById('totalUsersCount');
-        totalUsersCountElement.textContent = data.totalCount; // Update the content with the total count
-      })
-      .catch(error => {
-        console.error('Error fetching total user count:', error);
-      });
-  }
-  
-  function fetchTotalLoansCount() {
-    fetch('borrowed/totalLoansCount')
-      .then(response => response.json())
-      .then(data => {
-        const totalLoansCountElement = document.getElementById('totalLoansCount');
-        totalLoansCountElement.textContent = data.totalCount; // Update the content with the total count
-      })
-      .catch(error => {
-        console.error('Error fetching total loan count:', error);
-      });
-  }
-  
+ 
   $('#bookForm').submit(function (event) {
     event.preventDefault();
 
@@ -126,114 +91,9 @@ $(document).ready(function () {
     });
   });
 
-  // Fetch data for Dashboard Recent User Table
-  function fetchDashUsers() {
-    console.log("fetchUsers run");
+ 
 
-    fetch('user')
-      .then(response => response.json())
-      .then(data => {
-        console.log("User data fetched successfully");
-        const tableBody = document.getElementById('recent-users-table');
-        tableBody.innerHTML = ''; // Clear existing table content
-
-        // Get the last five users from the data array
-        const lastFiveUsers = data.slice(-5);
-
-        lastFiveUsers.forEach(user => {
-          const createDate = new Date(user.create_date);
-          const formattedDate = createDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          });
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${user.user_id}</td>
-            <td>${user.firstname}</td>
-            <td>${user.lastname}</td>
-            <td>${user.email}</td>
-            <td>${user.phone}</td>
-            <td>${user.address}</td>
-            <td>${formattedDate}</td>
-          `;
-          tableBody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching user data:', error);
-      });
-  }
-
-  // Fetch data for Dashboard Recent Loans Table
-  function fetchDashLoans() {
-    console.log("fetchBorrowed run");
-
-    fetch('http://localhost:3000/borrowed')
-      .then(response => response.json())
-      .then(data => {
-        console.log("Borrowed data fetched successfully");
-        const tableBody = document.getElementById('recent-loans-table');
-        tableBody.innerHTML = ''; // Clear existing table content
-        // Get the last five users from the data array
-        const lastFiveUsers = data.slice(-5);
-
-        lastFiveUsers.forEach(borrowed => {
-          const createDate = new Date(borrowed.borrow_date);
-          const formattedDate = createDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          });
-          const row = document.createElement('tr');
-          row.innerHTML = `
-          <td>${borrowed.borrow_id}</td>
-          <td>${borrowed.account_id}</td>
-          <td>${borrowed.ISBN}</td>
-          <td>${borrowed.title}</td>
-          <td>${formattedDate}</td>
-          <td>
-            <a href="#" class="btn btn-${borrowed.status === 'Normal' ? 'success' : 'danger'} btn-sm">${borrowed.status}</a>
-          </td>
-        `;
-          tableBody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching book data:', error);
-      });
-  }
-
-  function fetchBooks() {
-    console.log("fetchBooks run");
-
-    fetch('book?sort=book_id')
-      .then(response => response.json())
-      .then(data => {
-        console.log("Book data fetched successfully");
-        const tableBody = document.getElementById('books-table-body');
-        tableBody.innerHTML = ''; // Clear existing table content
-        data.forEach(book => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${book.ISBN}</td>
-            <td>${book.book_id}</td>
-            <td>${book.title}</td>
-            <td>${book.author}</td>
-            <td>${book.subject}</td>
-            <td>${book.publish_year}</td>
-            <td>${book.edition}</td>
-            <td>
-              <a href="#" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-          `;
-          tableBody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching book data:', error);
-      });
-  }
+ 
 
   function fetchUsers() {
     console.log("fetchUsers run");
@@ -274,51 +134,224 @@ $(document).ready(function () {
       });
   }
 
-  function fetchBorrowed() {
-    console.log("fetchBorrowed run");
-
-    fetch('borrowed')
-      .then(response => response.json())
-      .then(data => {
-        console.log("Borrowed data fetched successfully");
-        const tableBody = document.getElementById('borrowed-table-body');
-        tableBody.innerHTML = ''; // Clear existing table content
-        data.forEach(borrowed => {
-          const createDate = new Date(borrowed.borrow_date);
-          const formattedDate = createDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          });
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${borrowed.borrow_id}</td>
-            <td>${borrowed.account_id}</td>
-            <td>${borrowed.ISBN}</td>
-            <td>${borrowed.title}</td>
-            <td>${formattedDate}</td>
-            <td>
-              <a href="#" class="btn btn-${borrowed.status === 'Normal' ? 'success' : 'danger'} btn-sm">${borrowed.status}</a>
-            </td>
-          `;
-          tableBody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching book data:', error);
-      });
-  }
-  
-  fetchTotalBooksCount();
-  fetchTotalUsersCount();
-  fetchTotalLoansCount();
-  fetchDashUsers();
-  fetchDashLoans();
-  fetchBorrowed();
-  fetchBooks();
-  fetchUsers();
+ 
 });
 
+function fetchTotalBooksCount() {
+  fetch('book/totalCount')
+    .then(response => response.json())
+    .then(data => {
+      const totalBooksCountElement = document.getElementById('totalBooksCount');
+      totalBooksCountElement.textContent = data.totalCount; // Update the content with the total count
+    })
+    .catch(error => {
+      console.error('Error fetching total book count:', error);
+    });
+}
 
+function fetchTotalUsersCount() {
+  fetch('user/totalUsersCount')
+    .then(response => response.json())
+    .then(data => {
+      const totalUsersCountElement = document.getElementById('totalUsersCount');
+      totalUsersCountElement.textContent = data.totalCount; // Update the content with the total count
+    })
+    .catch(error => {
+      console.error('Error fetching total user count:', error);
+    });
+}
 
+function fetchTotalLoansCount() {
+  fetch('borrowed/totalLoansCount')
+    .then(response => response.json())
+    .then(data => {
+      const totalLoansCountElement = document.getElementById('totalLoansCount');
+      totalLoansCountElement.textContent = data.totalCount; // Update the content with the total count
+    })
+    .catch(error => {
+      console.error('Error fetching total loan count:', error);
+    });
+}
 
+ // Fetch data for Dashboard Recent User Table
+ function fetchDashUsers() {
+  console.log("fetchUsers run");
+
+  fetch('user')
+    .then(response => response.json())
+    .then(data => {
+      console.log("User data fetched successfully");
+      const tableBody = document.getElementById('recent-users-table');
+      tableBody.innerHTML = ''; // Clear existing table content
+
+      // Get the last five users from the data array
+      const lastFiveUsers = data.slice(-5);
+
+      lastFiveUsers.forEach(user => {
+        const createDate = new Date(user.create_date);
+        const formattedDate = createDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.user_id}</td>
+          <td>${user.firstname}</td>
+          <td>${user.lastname}</td>
+          <td>${user.email}</td>
+          <td>${user.phone}</td>
+          <td>${user.address}</td>
+          <td>${formattedDate}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching user data:', error);
+    });
+}
+
+// Fetch data for Dashboard Recent Loans Table
+function fetchDashLoans() {
+  console.log("fetchBorrowed run");
+
+  fetch('http://localhost:3000/borrowed')
+    .then(response => response.json())
+    .then(data => {
+      console.log("Borrowed data fetched successfully");
+      const tableBody = document.getElementById('recent-loans-table');
+      tableBody.innerHTML = ''; // Clear existing table content
+      // Get the last five users from the data array
+      const lastFiveUsers = data.slice(-5);
+
+      lastFiveUsers.forEach(borrowed => {
+        const createDate = new Date(borrowed.borrow_date);
+        const formattedDate = createDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td>${borrowed.borrow_id}</td>
+        <td>${borrowed.account_id}</td>
+        <td>${borrowed.ISBN}</td>
+        <td>${borrowed.title}</td>
+        <td>${formattedDate}</td>
+        <td>
+          <a href="#" class="btn btn-${borrowed.status === 'Normal' ? 'success' : 'danger'} btn-sm">${borrowed.status}</a>
+        </td>
+      `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching book data:', error);
+    });
+}
+
+function fetchBooks() {
+  console.log("fetchBooks run");
+
+  fetch('book?sort=book_id')
+    .then(response => response.json())
+    .then(data => {
+      console.log("Book data fetched successfully");
+      const tableBody = document.getElementById('books-table-body');
+      tableBody.innerHTML = ''; // Clear existing table content
+      data.forEach(book => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${book.ISBN}</td>
+          <td>${book.book_id}</td>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.subject}</td>
+          <td>${book.publish_year}</td>
+          <td>${book.edition}</td>
+          <td>
+            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching book data:', error);
+    });
+}
+
+function fetchUsers() {
+  console.log("fetchUsers run");
+
+  fetch('user')
+    .then(response => response.json())
+    .then(data => {
+      console.log("User data fetched successfully");
+      const tableBody = document.getElementById('users-table-body');
+      tableBody.innerHTML = ''; // Clear existing table content
+      data.forEach(user => {
+        const createDate = new Date(user.create_date);
+        const formattedDate = createDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.user_id}</td>
+          <td>${user.firstname}</td>
+          <td>${user.lastname}</td>
+          <td>${user.email}</td>
+          <td>${user.phone}</td>
+          <td>${user.address}</td>
+          <td>${user.username}</td>
+          <td>${user.password}</td>
+          <td>${formattedDate}</td>
+          <td>
+            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching book data:', error);
+    });
+}
+
+function fetchBorrowed() {
+  console.log("fetchBorrowed run");
+
+  fetch('borrowed')
+    .then(response => response.json())
+    .then(data => {
+      console.log("Borrowed data fetched successfully");
+      const tableBody = document.getElementById('borrowed-table-body');
+      tableBody.innerHTML = ''; // Clear existing table content
+      data.forEach(borrowed => {
+        const createDate = new Date(borrowed.borrow_date);
+        const formattedDate = createDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${borrowed.borrow_id}</td>
+          <td>${borrowed.account_id}</td>
+          <td>${borrowed.ISBN}</td>
+          <td>${borrowed.title}</td>
+          <td>${formattedDate}</td>
+          <td>
+            <a href="#" class="btn btn-${borrowed.status === 'Normal' ? 'success' : 'danger'} btn-sm">${borrowed.status}</a>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching book data:', error);
+    });
+}
