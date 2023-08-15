@@ -21,7 +21,7 @@
     <!--Include CSS file-->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <!-- Include jQuery library from a CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- Include custom JS file named "index.js" -->
     <script src="index.js"></script>
     <!-- Include Bootstrap JS library from a CDN -->
@@ -107,7 +107,7 @@
                     <div class="collapse" id="booksMgmt">
                         <div>
                             <ul class="navbar-nav ps-3">
-                                <li><a href="addNew.html" class="nav-link"><i class="far fa-plus me-2"></i> Add New</a>
+                                <li><a href="addBook.html" class="nav-link"><i class="far fa-plus me-2"></i> Add New</a>
                                 </li>
                                 <li><a href="manageBooks.html" class="nav-link"><i class="fas fa-list me-2"></i> Manage
                                         All</a></li>
@@ -144,8 +144,8 @@
                     <div class="collapse" id="bookLoan">
                         <div>
                             <ul class="navbar-nav ps-3">
-                                <li><a href="#" class="nav-link"><i class="far fa-plus me-2"></i> Add New</a></li>
-                                <li><a href="#" class="nav-link"><i class="fas fa-list me-2"></i> Manage All</a></li>
+                                <li><a href="bookLoanGeneral.html" class="nav-link"><i class="far fa-plus me-2"></i>General</a></li>
+                                <li><a href="bookLoanManage.html" class="nav-link"><i class="fas fa-list me-2"></i> Manage All</a></li>
                             </ul>
                         </div>
                     </div>
@@ -179,43 +179,51 @@
                             Fill the form
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form id="userForm">
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">User_ID</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <label for="user_id" class="form-label">User_ID</label>
+                                    <input type="text" class="form-control" id="user_id" name="user_id"
+                                    aria-describedby="useridHelp" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <label for="firstname" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstname" name="firstname"
+                                    aria-describedby="firstname" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Last Name</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1">
+                                    <label for="lastname" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname" name="lastname"
+                                    aria-describedby="lastnameHelp" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        aria-describedby="emailHelp" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Phone</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="text" class="form-control" id="phone" name="phone"
+                                        aria-describedby="phoneHelp" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="address" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address"
+                                        aria-describedby="addressHelp" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">User Name</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="username" class="form-label">User Name</label>
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        aria-describedby="usernameHelp" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Password</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="text" class="form-control" id="password" name="password"
+                                        aria-describedby="passwordHelp" autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="create_date" class="form-label">Create Date</label>
+                                    <input type="text" class="form-control" id="create_date" name="create_date"
+                                        aria-describedby="createDateHelp" autocomplete="off">
                                 </div>
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>

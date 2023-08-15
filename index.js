@@ -6,13 +6,88 @@ if (typeof jQuery === 'undefined') {
   console.log('jQuery is loaded.');
 }
 
+// Use Jquery to implement the "Add Book" function
 $(document).ready(function () {
   console.log("Document is ready");
+
+  $('#bookForm').submit(function (event) {
+    event.preventDefault();
+
+    const bookData = {
+      ISBN: $('#ISBN').val(),
+      book_id: $('#book_id').val(),
+      title: $('#title').val(),
+      author: $('#author').val(),
+      subject: $('#subject').val(),
+      publish_year: $('#publish_year').val(),
+      edition: $('#edition').val()
+    };
+
+    $.ajax({
+      url: 'http://localhost:3000/addBook',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(bookData),
+      success: function (response) {
+        console.log('Book data added successfully');
+        // Create a Bootstrap alert using jQuery
+        const successAlert = $('<div class="alert alert-success alert-dismissible mt-3 fade show" role="alert">')
+          .text('Successfully submitted to the database!')
+          .append('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+
+        $(".card-body").append(successAlert);
+
+        // Reset the form after submission
+        $("#bookForm")[0].reset();
+      },
+      error: function (error) {
+        console.error('Error adding book data:', error);
+      }
+    });
+  });
+
+  $('#userForm').submit(function (event) {
+    event.preventDefault();
+
+    const userData = {
+      user_id: $('#user_id').val(),
+      firstname: $('#firstname').val(),
+      lastname: $('#lastname').val(),
+      email: $('#email').val(),
+      phone: $('#phone').val(),
+      address: $('#address').val(),
+      username: $('#username').val(),
+      password: $('#password').val(),
+      create_date: $('#create_date').val()
+    };
+
+    $.ajax({
+      url: 'http://localhost:3000/addUser',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(userData),
+      success: function (response) {
+        console.log('User data added successfully');
+        // Create a Bootstrap alert using jQuery
+        const successAlert = $('<div class="alert alert-success alert-dismissible mt-3 fade show" role="alert">')
+          .text('Successfully submitted to the database!')
+          .append('<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>');
+
+        $(".card-body").append(successAlert);
+
+        // Reset the form after submission
+        $("#userForm")[0].reset();
+      },
+      error: function (error) {
+        console.error('Error adding user data:', error);
+      }
+    });
+  });
 
   function fetchBooks() {
     console.log("fetchBooks run");
 
-    fetch('http://localhost:3000/book')
+    fetch('http://localhost:3000/book?sort=book_id')
       .then(response => response.json())
       .then(data => {
         console.log("Book data fetched successfully");
@@ -120,5 +195,7 @@ $(document).ready(function () {
   fetchBooks();
   fetchUsers();
 });
+
+
 
 

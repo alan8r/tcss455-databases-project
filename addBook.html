@@ -21,7 +21,7 @@
     <!--Include CSS file-->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <!-- Include jQuery library from a CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- Include custom JS file named "index.js" -->
     <script src="index.js"></script>
     <!-- Include Bootstrap JS library from a CDN -->
@@ -144,8 +144,8 @@
                     <div class="collapse" id="bookLoan">
                         <div>
                             <ul class="navbar-nav ps-3">
-                                <li><a href="#" class="nav-link"><i class="far fa-plus me-2"></i> Add New</a></li>
-                                <li><a href="#" class="nav-link"><i class="fas fa-list me-2"></i> Manage All</a></li>
+                                <li><a href="bookLoanGeneral.html" class="nav-link"><i class="far fa-plus me-2"></i>General</a></li>
+                                <li><a href="bookLoanManage.html" class="nav-link"><i class="fas fa-list me-2"></i>Manage All</a></li>
                             </ul>
                         </div>
                     </div>
@@ -179,47 +179,56 @@
                             Please fill the form
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form id="bookForm">
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">ISBN</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1">
+                                    <label for="ISBN" class="form-label">ISBN</label>
+                                    <input type="text" class="form-control" id="ISBN" name="ISBN"
+                                    aria-describedby="ISBNHelp">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Book_ID</label>
-                                    <input type="number" class="form-control" id="exampleInputPassword1">
+                                    <label for="book_id" class="form-label">Book_ID</label>
+                                    <input type="number" class="form-control" id="book_id" name="book_id"
+                                    aria-describedby="bookIdHelp">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Book Title</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="title" class="form-label">Book Title</label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                    aria-describedby="bookTitleHelp">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Author</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="author" class="form-label">Author</label>
+                                    <input type="text" class="form-control" id="author" name="author"
+                                    aria-describedby="authorHelp">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Subject</label>
-                                    <select class="form-control">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <select class="form-control" id="subject" name="subject" aria-describedby="subjectHelp">
                                         <option value="">Please select</option>
-                                        <option value="">Art</option>
-                                        <option value="">Computer Science</option>
-                                        <option value="">History</option>
+                                        <option value="null">null</option>
+                                        <option value="Art">Art</option>
+                                        <option value="Biographical">Biographical</option>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Fantacy">Fantacy</option>
+                                        <option value="History">History</option>
+                                        <option value="Mystery">Mystery</option>
+                                        <option value="Novels">Novels</option>
+                                        <option value="Romans">Romans</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Thrillers">Thrillers</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Publish Year</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="publish_year" class="form-label">Publish Year</label>
+                                    <input type="text" class="form-control" id="publish_year"
+                                    aria-describedby="publishYearHelp">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Edition</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                        aria-describedby="emailHelp">
+                                    <label for="edition" class="form-label">Edition</label>
+                                    <input type="text" class="form-control" id="edition"
+                                    aria-describedby="editionHelp">
                                 </div>
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Cancel</button>
-
                             </form>
                         </div>
                     </div>
