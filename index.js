@@ -6,6 +6,8 @@ if (typeof jQuery === 'undefined') {
   console.log('jQuery is loaded.');
 }
 
+let serverAddress = 'http://localhost:3000'
+
 // Use Jquery to implement the "Add Book" function
 $(document).ready(function () {
   console.log("Document is ready");
@@ -25,7 +27,7 @@ $(document).ready(function () {
     };
 
     $.ajax({
-      url: 'addBook',
+      url: serverAddress+'/addBook',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(bookData),
@@ -69,7 +71,7 @@ $(document).ready(function () {
     };
 
     $.ajax({
-      url: 'addUser',
+      url: serverAddress+'/addUser',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(userData),
@@ -90,10 +92,55 @@ $(document).ready(function () {
       }
     });
   });
+
+ 
+
+ 
+
+  function fetchUsers() {
+    console.log("fetchUsers run");
+
+    fetch(serverAddress+'/user')
+      .then(response => response.json())
+      .then(data => {
+        console.log("User data fetched successfully");
+        const tableBody = document.getElementById('users-table-body');
+        tableBody.innerHTML = ''; // Clear existing table content
+        data.forEach(user => {
+          const createDate = new Date(user.create_date);
+          const formattedDate = createDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.user_id}</td>
+            <td>${user.firstname}</td>
+            <td>${user.lastname}</td>
+            <td>${user.email}</td>
+            <td>${user.phone}</td>
+            <td>${user.address}</td>
+            <td>${user.username}</td>
+            <td>${user.password}</td>
+            <td>${formattedDate}</td>
+            <td>
+              <a href="#" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching book data:', error);
+      });
+  }
+
+ 
 });
 
 function fetchTotalBooksCount() {
-  fetch('book/totalCount')
+  fetch(serverAddress+'/book/totalCount')
     .then(response => response.json())
     .then(data => {
       const totalBooksCountElement = document.getElementById('totalBooksCount');
@@ -105,7 +152,7 @@ function fetchTotalBooksCount() {
 }
 
 function fetchTotalUsersCount() {
-  fetch('user/totalUsersCount')
+  fetch(serverAddress+'/user/totalUsersCount')
     .then(response => response.json())
     .then(data => {
       const totalUsersCountElement = document.getElementById('totalUsersCount');
@@ -117,7 +164,7 @@ function fetchTotalUsersCount() {
 }
 
 function fetchTotalLoansCount() {
-  fetch('borrowed/totalLoansCount')
+  fetch(serverAddress+'/borrowed/totalLoansCount')
     .then(response => response.json())
     .then(data => {
       const totalLoansCountElement = document.getElementById('totalLoansCount');
@@ -132,7 +179,7 @@ function fetchTotalLoansCount() {
 function fetchDashUsers() {
   console.log("fetchUsers run");
 
-  fetch('user')
+  fetch(serverAddress+'/user')
     .then(response => response.json())
     .then(data => {
       console.log("User data fetched successfully");
@@ -171,7 +218,7 @@ function fetchDashUsers() {
 function fetchDashLoans() {
   console.log("fetchBorrowed run");
 
-  fetch('borrowed')
+  fetch(serverAddress+'/borrowed')
     .then(response => response.json())
     .then(data => {
       console.log("Borrowed data fetched successfully");
@@ -209,7 +256,7 @@ function fetchDashLoans() {
 function fetchBooks() {
   console.log("fetchBooks run");
 
-  fetch('book?sort=book_id')
+  fetch(serverAddress+'/book?sort=book_id')
     .then(response => response.json())
     .then(data => {
       console.log("Book data fetched successfully");
@@ -262,7 +309,7 @@ function deleteBook(ISBN) {
 function fetchUsers() {
   console.log("fetchUsers run");
 
-  fetch('user')
+  fetch(serverAddress+'/user')
     .then(response => response.json())
     .then(data => {
       console.log("User data fetched successfully");
@@ -323,7 +370,7 @@ function deleteUser(user_id) {
 function fetchBorrowed() {
   console.log("fetchBorrowed run");
 
-  fetch('borrowed')
+  fetch(serverAddress+'/borrowed')
     .then(response => response.json())
     .then(data => {
       console.log("Borrowed data fetched successfully");
