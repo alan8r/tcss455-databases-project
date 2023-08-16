@@ -292,7 +292,7 @@ function confirmDelete(ISBN) {
 }
 
 function deleteBook(ISBN) {
-  fetch(`book/${ISBN}`, {
+  fetch(serverAddress+`/book/${ISBN}`, {
     method: 'DELETE'
   })
   .then(response => response.json())
@@ -353,7 +353,7 @@ function confirmUserDelete(user_id) {
 }
 
 function deleteUser(user_id) {
-  fetch(`user/${user_id}`, {
+  fetch(serverAddress+`/user/${user_id}`, {
     method: 'DELETE'
   })
   .then(response => response.json())
