@@ -144,6 +144,49 @@ app.post('/addUser', (req, res) => {
   });
 });
 
+// Define a route for deleting a book by ISBN
+app.delete('/book/:ISBN', (req, res) => {
+  const ISBN = req.params.ISBN;
+
+  const deleteQuery = 'DELETE FROM book WHERE ISBN = ?';
+
+  db.query(deleteQuery, [ISBN], (error, results) => {
+    if (error) {
+      console.error('Error deleting book:', error);
+      return res.status(500).json({ error: 'Error deleting book' });
+    }
+
+    if (results.affectedRows === 0) {
+      // No rows were affected, indicating book not found
+      return res.status(404).json({ error: 'Book not found' });
+    }
+
+    console.log('Book deleted successfully');
+    res.json({ message: 'Book deleted successfully' });
+  });
+});
+
+// Define a route for deleting a book by ISBN
+app.delete('/user/:user_id', (req, res) => {
+  const userID = req.params.user_id;
+
+  const deleteQuery = 'DELETE FROM user WHERE user_id = ?';
+
+  db.query(deleteQuery, [userID], (error, results) => {
+    if (error) {
+      console.error('Error deleting user:', error);
+      return res.status(500).json({ error: 'Error deleting user' });
+    }
+
+    if (results.affectedRows === 0) {
+      // No rows were affected, indicating book not found
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    console.log('User deleted successfully');
+    res.json({ message: 'User deleted successfully' });
+  });
+});
 // Start the server
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

@@ -10,7 +10,7 @@ if (typeof jQuery === 'undefined') {
 $(document).ready(function () {
   console.log("Document is ready");
 
- 
+
   $('#bookForm').submit(function (event) {
     event.preventDefault();
 
@@ -90,51 +90,6 @@ $(document).ready(function () {
       }
     });
   });
-
- 
-
- 
-
-  function fetchUsers() {
-    console.log("fetchUsers run");
-
-    fetch('user')
-      .then(response => response.json())
-      .then(data => {
-        console.log("User data fetched successfully");
-        const tableBody = document.getElementById('users-table-body');
-        tableBody.innerHTML = ''; // Clear existing table content
-        data.forEach(user => {
-          const createDate = new Date(user.create_date);
-          const formattedDate = createDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          });
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${user.user_id}</td>
-            <td>${user.firstname}</td>
-            <td>${user.lastname}</td>
-            <td>${user.email}</td>
-            <td>${user.phone}</td>
-            <td>${user.address}</td>
-            <td>${user.username}</td>
-            <td>${user.password}</td>
-            <td>${formattedDate}</td>
-            <td>
-              <a href="#" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-          `;
-          tableBody.appendChild(row);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching book data:', error);
-      });
-  }
-
- 
 });
 
 function fetchTotalBooksCount() {
@@ -173,8 +128,8 @@ function fetchTotalLoansCount() {
     });
 }
 
- // Fetch data for Dashboard Recent User Table
- function fetchDashUsers() {
+// Fetch data for Dashboard Recent User Table
+function fetchDashUsers() {
   console.log("fetchUsers run");
 
   fetch('user')
@@ -216,7 +171,7 @@ function fetchTotalLoansCount() {
 function fetchDashLoans() {
   console.log("fetchBorrowed run");
 
-  fetch('http://localhost:3000/borrowed')
+  fetch('borrowed')
     .then(response => response.json())
     .then(data => {
       console.log("Borrowed data fetched successfully");
@@ -271,7 +226,7 @@ function fetchBooks() {
           <td>${book.publish_year}</td>
           <td>${book.edition}</td>
           <td>
-            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+            <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('${book.ISBN}')">Delete</a>
           </td>
         `;
         tableBody.appendChild(row);
@@ -280,6 +235,28 @@ function fetchBooks() {
     .catch(error => {
       console.error('Error fetching book data:', error);
     });
+}
+
+function confirmDelete(ISBN) {
+  const confirmed = confirm('Are you sure you want to delete this book?');
+  if (confirmed) {
+    deleteBook(ISBN);
+  }
+}
+
+function deleteBook(ISBN) {
+  fetch(`book/${ISBN}`, {
+    method: 'DELETE'
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Book deleted successfully:', data);
+    // Refresh the book list after deletion
+    fetchBooks();
+  })
+  .catch(error => {
+    console.error('Error deleting book:', error);
+  });
 }
 
 function fetchUsers() {
@@ -310,15 +287,37 @@ function fetchUsers() {
           <td>${user.password}</td>
           <td>${formattedDate}</td>
           <td>
-            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+            <a href="#" class="btn btn-danger btn-sm" onclick="confirmUserDelete('${user.user_id}')">Delete</a>
           </td>
         `;
         tableBody.appendChild(row);
       });
     })
     .catch(error => {
-      console.error('Error fetching book data:', error);
+      console.error('Error fetching user data:', error);
     });
+}
+
+function confirmUserDelete(user_id) {
+  const confirmed = confirm('Are you sure you want to delete this user?');
+  if (confirmed) {
+    deleteUser(user_id);
+  }
+}
+
+function deleteUser(user_id) {
+  fetch(`user/${user_id}`, {
+    method: 'DELETE'
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('User deleted successfully:', data);
+    // Refresh the user list after deletion
+    fetchUsers();
+  })
+  .catch(error => {
+    console.error('Error deleting user:', error);
+  });
 }
 
 function fetchBorrowed() {
